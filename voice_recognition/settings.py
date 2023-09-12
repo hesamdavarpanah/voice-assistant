@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'voice_recognition.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'voice_recognition_db',
-        'USER': 'voice_recognition_admin',
-        'PASSWORD': 'SecurePas$14020529',
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USERNAME'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT'),
     }
 }
 
@@ -133,8 +133,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-CELERY_BROKER_URL = "redis://localhost:6379"
-CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_BROKER_URL = f"{os.getenv('REDIS_SCHEME')}://{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}"
+CELERY_RESULT_BACKEND = f"{os.getenv('REDIS_SCHEME')}://{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}"
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
