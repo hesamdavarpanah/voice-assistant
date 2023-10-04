@@ -45,7 +45,8 @@ class OfflineVoiceDetectionViewSet(ModelViewSet):
                 name = path.split(voice.voice_file.path)[-1][:-4]
                 convert_name = f'Speech/temp/convert_{name}.wav'
                 system(f"ffmpeg -i {voice.voice_file.path} -ar 16000 -ac 1 {convert_name} -y")
-                offline_inference_task = offline_inference.delay(convert_name, 'Speech/chime.wav', 'Speech/release_files',
+                offline_inference_task = offline_inference.delay(convert_name, 'Speech/chime.wav',
+                                                                 'Speech/release_files',
                                                                  voice_id)
                 task_status = offline_inference_task.status
                 message = "started"
@@ -57,3 +58,5 @@ class OfflineVoiceDetectionViewSet(ModelViewSet):
             explanation = "the voice file not found"
 
             return Response({"message": message, "explanation": explanation}, status=404)
+        except Exception as exception:
+            return Response(data=f"error: {str(exception.__class__)}", status=500)

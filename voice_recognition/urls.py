@@ -24,4 +24,5 @@ urlpatterns = [
     path('offline-voice/', include('offline_speech_recognition.urls')),
     path('online-voice/', include('online_speech_recognition.urls')),
     path('voice-gallery/', include('voice_manager.urls')),
+    path('pitch-shift/', include('pitch_shift_recognition.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
