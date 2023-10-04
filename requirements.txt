@@ -1,11 +1,11 @@
 asgiref==3.7.2
-Django==4.2.4
+Django==4.2.5
 pip==23.2.1
-setuptools==68.1.2
+setuptools==68.2.2
 sqlparse==0.4.4
 typing-extensions
 wheel==0.41.2
-psycopg2-binary==2.9.7
+psycopg2-binary==2.9.8
 djangorestframework==3.14.0
 django-cors-headers==4.2.0
 tensorflow==2.13.0
@@ -15,6 +15,9 @@ ffmpeg==1.4
 pydub==0.25.1
 soundfile==0.12.1
 librosa==0.10.1
-celery==5.3.1
-redis==5.0.0
+celery==5.3.4
+redis==5.0.1
 psutil==5.9.5
+torchaudio==2.0.2
+pedalboard==0.8.1
+mutagen==1.47.0

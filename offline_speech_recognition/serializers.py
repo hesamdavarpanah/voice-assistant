@@ -1,11 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Voice, VoiceResult, VoiceDetail
-
-
-class VoiceSerializer(ModelSerializer):
-    class Meta:
-        model = Voice
-        fields = "__all__"
+from .models import VoiceResult, VoiceDetail
 
 
 class VoiceDetailSerializer(ModelSerializer):

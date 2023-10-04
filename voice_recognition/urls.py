@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('offline-voice/', include('offline_speech_recognition.urls')),
     path('online-voice/', include('online_speech_recognition.urls')),
+    path('voice-gallery/', include('voice_manager.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

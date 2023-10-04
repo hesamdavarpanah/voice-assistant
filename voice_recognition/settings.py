@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-^baao3%eq*o2@e!07#pght31go4b18yg8!6u#8#g17wn6&fh5r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1', '172.16.60.151']
 
 # Application definition
 
@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'offline_speech_recognition',
-    'online_speech_recognition'
+    'online_speech_recognition',
+    'pitch_shift_recognition',
+    'voice_split',
+    'voice_manager'
 ]
 
 MIDDLEWARE = [
@@ -72,7 +75,8 @@ TEMPLATES = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'PAGINATE_BY_PARAM': 'page_size'
 }
 
 WSGI_APPLICATION = 'voice_recognition.wsgi.application'
@@ -83,11 +87,11 @@ WSGI_APPLICATION = 'voice_recognition.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USERNAME'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATABASE_PORT'),
+        'NAME': 'voice_recognition_db',
+        'USER': 'voice_recognition_admin',
+        'PASSWORD': 'SecurePas$14020529',
+        'HOST': 'localhost',
+        'PORT': 5432,
     }
 }
 
@@ -133,8 +137,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-CELERY_BROKER_URL = f"{os.getenv('REDIS_SCHEME')}://{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}"
-CELERY_RESULT_BACKEND = f"{os.getenv('REDIS_SCHEME')}://{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}"
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'

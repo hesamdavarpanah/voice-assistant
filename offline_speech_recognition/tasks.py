@@ -7,7 +7,8 @@ from pydub import AudioSegment
 
 from Speech.offline_stream_test import FrameASR
 
-from .models import Voice, VoiceResult, VoiceDetail
+from .models import VoiceResult, VoiceDetail
+from voice_manager.models import Voice
 
 
 @shared_task()
