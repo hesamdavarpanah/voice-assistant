@@ -29,25 +29,31 @@ class OfflineVoiceDetectionViewSet(ModelViewSet):
         global task_status
         user = User.objects.get(username='admin')
         voice_id = int(self.kwargs["voice_id"])
-        voice = Voice.objects.get(id=voice_id, user=user)
-        # try:
-        #     find_result = VoiceResult.objects.get(voice=voice)
-        #     voice_result_serializer = VoiceResultSerializer(find_result)
-        #     task_status = None
-        #     return Response(data=voice_result_serializer.data, status=200)
-        # except ObjectDoesNotExist:
-        if task_status:
-            message = task_status.lower()
-            explanation = f"the voice recognition is {task_status.lower()}"
-            return Response(data={"message": message, "explanation": explanation}, status=200)
+        try:
+            voice = Voice.objects.get(id=voice_id, user=user)
+            try:
+                find_result = VoiceResult.objects.get(voice=voice)
+                voice_result_serializer = VoiceResultSerializer(find_result)
+                task_status = None
+                return Response(data=voice_result_serializer.data, status=200)
+            except ObjectDoesNotExist:
+                if task_status:
+                    message = task_status.lower()
+                    explanation = f"the voice recognition is {task_status.lower()}"
+                    return Response(data={"message": message, "explanation": explanation}, status=200)
 
-        name = path.split(voice.voice_file.path)[-1][:-4]
-        convert_name = f'Speech/temp/convert_{name}.wav'
-        system(f"ffmpeg -i {voice.voice_file.path} -ar 16000 -ac 1 {convert_name} -y")
-        offline_inference_task = offline_inference.delay(convert_name, 'Speech/chime.wav', 'Speech/release_files',
-                                                         voice_id)
-        task_status = offline_inference_task.status
-        message = "started"
-        explanation = "the voice recognition has been started"
+                name = path.split(voice.voice_file.path)[-1][:-4]
+                convert_name = f'Speech/temp/convert_{name}.wav'
+                system(f"ffmpeg -i {voice.voice_file.path} -ar 16000 -ac 1 {convert_name} -y")
+                offline_inference_task = offline_inference.delay(convert_name, 'Speech/chime.wav', 'Speech/release_files',
+                                                                 voice_id)
+                task_status = offline_inference_task.status
+                message = "started"
+                explanation = "the voice recognition has been started"
 
-        return Response({"message": message, "explanation": explanation}, status=200)
+                return Response({"message": message, "explanation": explanation}, status=200)
+        except ObjectDoesNotExist:
+            message = "not found"
+            explanation = "the voice file not found"
+
+            return Response({"message": message, "explanation": explanation}, status=404)
