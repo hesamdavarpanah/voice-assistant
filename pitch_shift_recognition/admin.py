@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import PitchShiftResult
 
-# Register your models here.
+
+class PitchShiftResultAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(PitchShiftResult, PitchShiftResultAdmin)

@@ -66,4 +66,4 @@ class PitchShiftTest(TestCase):
         output_file = pitch_shift.generate(audio, effected, name, output_dir, 1)
         pitch_shift.clean_temp(name)
         info = pitch_shift.get_log(output_file, 'wav')
-        print(info)
+        self.assertIsNotNone(info)
