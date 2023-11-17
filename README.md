@@ -1,27 +1,45 @@
-REDIS_SCHEME=redis
+# Voice Assistant Django Project
+<center><img src="./logo.png" alt="logo"></center>
 
-REDIS_HOST=0.0.0.0
+## Overview
+This repository contains a voice assistant application built with Django. The application features pitch shift, voice denoise, and hot word detection capabilities in both online and offline modes.
 
-REDIS_PORT=6379
+## Features
+- **Pitch Shift**: Adjusts the pitch of the voice input.
+- **Voice Denoise**: Reduces background noise from the voice input.
+- **Hot Word Detection**: Detects specific trigger words in the voice input. Works in both online and offline modes.
 
-REDIS_PASSWORD=MetaX_Voice$14020529
+## Getting Started
 
-DATABASE_NAME=voice_recognition_db
+### Prerequisites
+- Docker
+- Python 3.x
+- Django
 
-DATABASE_USER=voice_recognition_admin
+### Installation
+1. Clone the repository:
 
-DATABASE_PASSWORD=MetaX_Voice$14020529
+   ```shell
+   git clone https://github.com/hesamdavarpanah/voice-assistant.git
+   ```
 
-DATABASE_HOST=0.0.0.0
+2. Navigate to the project directory
+   ```shell
+   cd voice-assistant
+   ```
 
-DATABASE_PORT=5432
+3. Run the Docker containers
+   ```shell
+   docker compose up -d
+   ```
 
-DJANGO_SUPERUSER_USERNAME=admin
 
-DJANGO_SUPERUSER_PASSWORD=SecurePas$1
+Now, you can access the application at `http://0.0.0.0:8000`.
 
-DJANGO_SUPERUSER_EMAIL=admin@example.com
+## Usage
+To use this application, you can send a voice file with the required fields to the voice gallery URL to perform CRUD operations on the voice gallery. You can also send the stored voice file to the offline hot word detection URL, pitch shift URL, or denoise URL to use the voice assistant abilities.
+## License
+This project is licensed under the [MIT License](./LICENSE).
 
-GATEWAY_HOST=0.0.0.0
-
-GATEWAY_PORT=8000
+## Contact
+Hesam Davarpanah - hesamdavarpanah@gmail.com

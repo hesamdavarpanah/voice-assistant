@@ -7,9 +7,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=voice_recognition_admin
-      - POSTGRES_PASSWORD=SecurePas$14020529
-      - SECOND_DB_NAME=voice_recognition_db
+      - POSTGRES_USER=YourDBUser
+      - POSTGRES_PASSWORD=YourDBPassword
+      - SECOND_DB_NAME=YourDBName
     volumes:
       - ./create_second_db.sh:/docker-entrypoint-initdb.d/create_second_db.sh
     networks:
@@ -26,29 +26,29 @@ services:
     networks:
       - backend
 
-  voice-recognition:
-    container_name: "voice_recognition"
-    image: "voice_recognition-system"
+  voice-assistant:
+    container_name: "voice_assistant"
+    image: "voice_assistant-system"
     build:
       dockerfile: Dockerfile
     ports:
       - "8001:8000"
     environment:
       - DJANGO_SUPERUSER_USERNAME=admin
-      - DJANGO_SUPERUSER_PASSWORD=SecurePas$1
+      - DJANGO_SUPERUSER_PASSWORD=admin
       - DJANGO_SUPERUSER_EMAIL=admin@example.com
       - GATEWAY_HOST=0.0.0.0
       - GATEWAY_PORT=8000
-      - DATABASE_NAME=voice_recognition_db
-      - DATABASE_USERNAME=voice_recognition_admin
-      - DATABASE_PASSWORD=SecurePas$14020529
+      - DATABASE_NAME=YourDBName
+      - DATABASE_USERNAME=YourDBUser
+      - DATABASE_PASSWORD=YourDBPassword
       - DATABASE_HOST=postgresql
       - DATABASE_PORT=5432
       - REDIS_SCHEME=redis
       - REDIS_HOST=redis-server
       - REDIS_PORT=6379
       - REDIS_ONLINE_DB=1
-      - PROJECT_NAME=voice_recognition
+      - PROJECT_NAME=voice_assistant
     networks:
       - backend
     restart: "on-failure"

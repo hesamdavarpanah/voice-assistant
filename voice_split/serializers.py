@@ -1,14 +1,8 @@
 from rest_framework.serializers import ModelSerializer
-from .models import HighDenoiseResult, LowDenoiseResult
+from .models import DenoiseResult
 
 
-class HighDenoiseResultSerializers(ModelSerializer):
+class DenoiseResultSerializers(ModelSerializer):
     class Meta:
-        model = HighDenoiseResult
-        fields = "__all__"
-
-
-class LowDenoiseResultSerializers(ModelSerializer):
-    class Meta:
-        model = LowDenoiseResult
+        model = DenoiseResult
         fields = "__all__"

@@ -13,15 +13,16 @@ RUN apt-get install -y ffmpeg
 
 RUN python -m pip install --upgrade pip
 
-WORKDIR /voice_recognition
+WORKDIR /voice_assistant
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir --upgrade -r /voice_recognition/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /voice_assistant/requirements.txt
 
-COPY . /voice_recognition
+COPY . /voice_assistant
 
 RUN chmod +x ./run.sh
 RUN chmod -R 777 ./
 
 CMD ["./run.sh"]
+ENTRYPOINT ["./celery_runner.sh"]

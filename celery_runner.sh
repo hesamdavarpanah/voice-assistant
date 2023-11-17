@@ -1,0 +1,1 @@
+celery -A "${PROJECT_NAME}" worker -l INFO

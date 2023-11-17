@@ -10,8 +10,6 @@ until nc -z "${REDIS_HOST}" "${REDIS_PORT}"; do
     sleep 1
 done
 
-
-celery -A "${PROJECT_NAME}" worker -l INFO
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser --noinput

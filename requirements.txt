@@ -24,6 +24,4 @@ mutagen==1.47.0
 denoiser==0.1.5
 tqdm==4.66.1
 resampy==0.4.2
-opencv-contrib-python==4.8.1.78
-opencv-python==4.8.1.78
 torch==2.0.1
