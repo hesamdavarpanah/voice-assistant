@@ -1,7 +1,7 @@
 # Voice Assistant Django Project
-<p align="center">
+<div style="text-align: center">
     <img src="./logo.png" alt="voice assistant logo">
-</p>
+</div>
 
 ## Overview
 This repository contains a voice assistant application built with Django. The application features pitch shift, voice denoise, and hot word detection capabilities in both online and offline modes.
